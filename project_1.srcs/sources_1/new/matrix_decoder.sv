@@ -27,32 +27,30 @@ module matrix_decoder(
         output logic [3:0] sel_number
     );
     
-    logic [3:0] rows;
-    logic [3:0] columns;
+    logic [3:0] row_drive, column_drive;
     
-    assign rows = {JC4, JC3, JC2, JC1};
-    assign columns = {JC10, JC9, JC8, JC7};
+    assign {JC4, JC3, JC2, JC1} = row_drive;
+    assign column_drive = {JC10, JC9, JC8, JC7};
     
-    logic [2:0] row_no;
+    logic [1:0] row_no;
     
-    logic [2:0] col_no;
+    logic [1:0] col_no;
     
     
     // Setting the col no so they can scan
     always_ff @(posedge clk) begin     
-         col_no += 1;
-         
          if (col_no == 2'b00) row_no += 1;
+         col_no += 1;
     end
        
        
     // Setting the row_number
     always_comb begin
         case (row_no)
-            2'b00 : rows = 4'b0001;
-            2'b01 : rows = 4'b0010;
-            2'b10 : rows = 4'b0100;
-            2'b11 : rows = 4'b1000;
+            2'b00 : row_drive = 4'b0001;
+            2'b01 : row_drive = 4'b0010;
+            2'b10 : row_drive = 4'b0100;
+            2'b11 : row_drive = 4'b1000;
         endcase
         
     end
@@ -60,7 +58,7 @@ module matrix_decoder(
     //sel_number <= (((row_no_comp[7:4] - 1) >> 1) + 1 + row_no_comp[3:0]);
     
     logic [7:0] row_no_comp;
-    assign row_no_comp = { ((row_no - 1) << 2), ((col_no-1) << 2)};
+    assign row_no_comp = { ((row_drive - 1) << 2), ((column_drive -1) << 2)};
    
    always_ff  @(posedge clk) begin
         if (row_no_comp != 8'hCC) begin // Catch Exception
