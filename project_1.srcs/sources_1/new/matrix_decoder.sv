@@ -57,7 +57,18 @@ module matrix_decoder(
         
     end
     
-    assign sel_number = (row_no << 2) + columns[col_no];
-       
+    //sel_number <= (((row_no_comp[7:4] - 1) >> 1) + 1 + row_no_comp[3:0]);
+    
+    logic [7:0] row_no_comp;
+    assign row_no_comp = { ((row_no - 1) << 2), ((col_no-1) << 2)};
+   
+   always_ff  @(posedge clk) begin
+        if (row_no_comp != 8'hCC) begin // Catch Exception
+            if ( row_no_comp[3:0] != 4'h4) sel_number <= 4'hB + row_no_comp[7:4];
+            else if ( row_no_comp[7:4] != 4'h4 ) sel_number <= (((row_no_comp[7:4] - 1) >> 1) + 1 + row_no_comp[3:0] );
+            else if ( row_no_comp[4] == 1'b1) sel_number <= 4'h9 + ( row_no_comp[3:0] >> 1 ) + 1;
+            else sel_number <= 4'h0;
+        end
+   end
         
 endmodule
