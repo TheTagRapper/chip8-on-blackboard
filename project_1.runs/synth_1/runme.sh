@@ -8,9 +8,9 @@
 # 
 
 if [ -z "$PATH" ]; then
-  PATH=/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c5111/Vivado/2025.2/Vitis/bin:/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c5111/Vivado/2025.2/Vivado/ids_lite/ISE/bin/lin64:/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c5111/Vivado/2025.2/Vivado/bin
+  PATH=/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c511/Vivado/2025.2/Vitis/bin:/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c511/Vivado/2025.2/Vivado/ids_lite/ISE/bin/lin64:/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c511/Vivado/2025.2/Vivado/bin
 else
-  PATH=/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c5111/Vivado/2025.2/Vitis/bin:/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c5111/Vivado/2025.2/Vivado/ids_lite/ISE/bin/lin64:/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c5111/Vivado/2025.2/Vivado/bin:$PATH
+  PATH=/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c511/Vivado/2025.2/Vitis/bin:/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c511/Vivado/2025.2/Vivado/ids_lite/ISE/bin/lin64:/media/pyra/88d368f5-2c7d-43f4-90cd-458b64c9c511/Vivado/2025.2/Vivado/bin:$PATH
 fi
 export PATH
 
@@ -37,4 +37,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log matrix_decoder.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source matrix_decoder.tcl
+EAStep vivado -log matrix_to_sevenseg.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source matrix_to_sevenseg.tcl

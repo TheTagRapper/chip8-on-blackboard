@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="pyra" Host="pyra-pargat-linuxmint" Pid="57599" HostCore="12" HostMemory="32491864">
+    <Process Command="vivado" Owner="pyra" Host="pyra-pargat-linuxmint" Pid="76763" HostCore="12" HostMemory="32491856">
     </Process>
 </ProcessHandle>

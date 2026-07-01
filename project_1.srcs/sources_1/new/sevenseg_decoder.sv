@@ -22,7 +22,8 @@
 module sevenseg_decoder(
     input logic [3:0] hexval,
     output logic [7:0] cathodes,
-    input logic active
+    input logic active,
+    input logic decimal
 );
 
 always_comb

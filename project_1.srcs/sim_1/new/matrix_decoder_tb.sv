@@ -39,6 +39,8 @@ matrix_decoder md0 (.*);
 always #2ns clk <= ~clk;
   
 
+// One thing this testbench doesn't account for is the fact that it will alternate between on and off for scanning rows
+
 initial begin
   
     $dumpfile("dump.vcd");
@@ -52,7 +54,13 @@ initial begin
   	#1ns nReset = 0;
   	#1ns nReset = 1;
     
-    #64ns JC7 = 0;
+    #62ns JC7 = 0; JC8 = 1;
+    
+    #64ns JC8 = 0; JC9 = 1;
+    
+    #64ns JC9 = 0; JC10 = 1;
+    
+    #64ns JC7 = 1;
 
 end
 

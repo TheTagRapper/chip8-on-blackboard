@@ -7,4 +7,4 @@
 # Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 #
 
-vivado -log matrix_decoder.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source matrix_decoder.tcl
+vivado -log matrix_to_sevenseg.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source matrix_to_sevenseg.tcl

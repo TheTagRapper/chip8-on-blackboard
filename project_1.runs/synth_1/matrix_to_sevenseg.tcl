@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "/home/pyra/Documents/Personal Projects/CHIP8-on-Blackboard/project_1.runs/synth_1/matrix_decoder.tcl"
+  variable script "/home/pyra/Documents/Personal Projects/CHIP8-on-Blackboard/project_1.runs/synth_1/matrix_to_sevenseg.tcl"
   variable category "vivado_synth"
 }
 
@@ -56,8 +56,6 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 3
-set_param xicom.use_bs_reader 1
 set_param general.usePosixSpawnForFork 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z007sclg400-1
@@ -74,7 +72,11 @@ set_property ip_output_repo {/home/pyra/Documents/Personal Projects/CHIP8-on-Bla
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog -library xil_defaultlib -sv {{/home/pyra/Documents/Personal Projects/CHIP8-on-Blackboard/project_1.srcs/sources_1/new/matrix_decoder.sv}}
+read_verilog -library xil_defaultlib -sv {
+  {/home/pyra/Documents/Personal Projects/CHIP8-on-Blackboard/project_1.srcs/sources_1/new/matrix_decoder.sv}
+  {/home/pyra/Documents/Personal Projects/CHIP8-on-Blackboard/project_1.srcs/sources_1/new/sevenseg_decoder.sv}
+  {/home/pyra/Documents/Personal Projects/CHIP8-on-Blackboard/project_1.srcs/sources_1/new/matrix_to_sevenseg.sv}
+}
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -93,7 +95,7 @@ read_checkpoint -auto_incremental -incremental {/home/pyra/Documents/Personal Pr
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top matrix_decoder -part xc7z007sclg400-1
+synth_design -top matrix_to_sevenseg -part xc7z007sclg400-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
@@ -103,10 +105,10 @@ if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
 OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef matrix_decoder.dcp
+write_checkpoint -force -noxdef matrix_to_sevenseg.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-generate_parallel_reports -reports { "report_utilization -file matrix_decoder_utilization_synth.rpt -pb matrix_decoder_utilization_synth.pb"  } 
+generate_parallel_reports -reports { "report_utilization -file matrix_to_sevenseg_utilization_synth.rpt -pb matrix_to_sevenseg_utilization_synth.pb"  } 
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]
