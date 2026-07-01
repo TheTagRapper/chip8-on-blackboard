@@ -22,23 +22,37 @@
 
 module matrix_decoder_tb;
 
+// Commented out signals are internal to see on observation  
+
 logic JC1, JC2, JC3, JC4; // JC1 is row 0 
 logic JC7, JC8, JC9, JC10; // JC7 is col 0;
 logic clk;
 logic [3:0] sel_number;
+//logic [1:0] row_no;
+//logic [1:0] col_no;
+logic nReset;
+//logic col_on;
+logic ignore_input;
 
 matrix_decoder md0 (.*);
 
 always #2ns clk <= ~clk;
+  
 
 initial begin
+  
+    $dumpfile("dump.vcd");
+  	$dumpvars(1);
     
     // Ensuring 0 is yielded
-    JC7 = 0; JC8 = 0; JC9 = 0; JC10 = 0;
+    JC7 = 1; JC8 = 0; JC9 = 0; JC10 = 0; nReset = 1;
         
     clk = 0;
+  
+  	#1ns nReset = 0;
+  	#1ns nReset = 1;
     
-    #64ns JC7 = 1;
+    #64ns JC7 = 0;
 
 end
 
