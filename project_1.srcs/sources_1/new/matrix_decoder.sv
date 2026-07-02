@@ -55,7 +55,7 @@ module matrix_decoder(
         end // Handling iteration    
         else begin
           sel_number <= calc_number;
-          ignore_input <= ~col_on; // Needs to be paired with sel_
+          ignore_input <= ~col_on; // Needs to be paired with sel_number as will result in a delay on the next column
           if (col_no == 2'b11) row_no <= row_no + 1;
           col_no <= col_no + 1;
         end
