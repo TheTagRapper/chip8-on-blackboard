@@ -103,3 +103,18 @@
     <Process Command="vivado" Owner="pyra" Host="pyra-pargat-linuxmint" Pid="68022" HostCore="12" HostMemory="32491872">
     </Process>
 </ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="pyra" Host="pyra-pargat-linuxmint" Pid="77685" HostCore="12" HostMemory="32491872">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="pyra" Host="pyra-pargat-linuxmint" Pid="81603" HostCore="12" HostMemory="32491872">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="pyra" Host="pyra-pargat-linuxmint" Pid="82552" HostCore="12" HostMemory="32491872">
+    </Process>
+</ProcessHandle>

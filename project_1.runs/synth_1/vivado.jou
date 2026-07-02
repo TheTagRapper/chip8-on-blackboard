@@ -3,8 +3,8 @@
 # SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Thu Jul  2 14:15:38 2026
-# Process ID         : 67804
+# Start of session at: Thu Jul  2 15:07:11 2026
+# Process ID         : 82328
 # Current directory  : /home/pyra/Documents/Personal Projects/CHIP8-on-Blackboard/project_1.runs/synth_1
 # Command line       : vivado -log matrix_to_sevenseg.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source matrix_to_sevenseg.tcl
 # Log file           : /home/pyra/Documents/Personal Projects/CHIP8-on-Blackboard/project_1.runs/synth_1/matrix_to_sevenseg.vds
@@ -13,12 +13,12 @@
 # Platform           : Linuxmint
 # Operating System   : Linux Mint 22.3
 # Processor Detail   : 13th Gen Intel(R) Core(TM) i5-13420H
-# CPU Frequency      : 3313.920 MHz
+# CPU Frequency      : 400.000 MHz
 # CPU Physical cores : 8
 # CPU Logical cores  : 12
 # Host memory        : 33271 MB
 # Swap memory        : 0 MB
 # Total Virtual      : 33271 MB
-# Available Virtual  : 25368 MB
+# Available Virtual  : 25167 MB
 #-----------------------------------------------------------
 source matrix_to_sevenseg.tcl -notrace

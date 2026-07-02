@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date         : Thu Jul  2 14:16:13 2026
+| Date         : Thu Jul  2 15:07:47 2026
 | Host         : pyra-pargat-linuxmint running 64-bit Linux Mint 22.3
 | Command      : report_control_sets -verbose -file matrix_to_sevenseg_control_sets_placed.rpt
 | Design       : matrix_to_sevenseg
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |     3 |
-|    Minimum number of control sets                        |     3 |
+| Total control sets                                       |     4 |
+|    Minimum number of control sets                        |     4 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    15 |
+| Unused register locations in slices containing registers |    21 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,12 +39,12 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |     3 |
+| Total control sets |     4 |
 | >= 0 to < 4        |     0 |
 | >= 4 to < 6        |     2 |
 | >= 6 to < 8        |     0 |
 | >= 8 to < 10       |     0 |
-| >= 10 to < 12      |     0 |
+| >= 10 to < 12      |     1 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
 | >= 16              |     1 |
@@ -61,7 +61,7 @@ Table of Contents
 | No           | No                    | No                     |               0 |            0 |
 | No           | No                    | Yes                    |              37 |           15 |
 | No           | Yes                   | No                     |               0 |            0 |
-| Yes          | No                    | No                     |               4 |            1 |
+| Yes          | No                    | No                     |              14 |            3 |
 | Yes          | No                    | Yes                    |               0 |            0 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
@@ -73,8 +73,9 @@ Table of Contents
 +----------------+---------------+------------------+------------------+----------------+--------------+
 |  Clock Signal  | Enable Signal | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
 +----------------+---------------+------------------+------------------+----------------+--------------+
-|  clk_IBUF_BUFG | md0/E[0]      |                  |                1 |              4 |         4.00 |
 |  cd0/CLK       |               | btn_IBUF[0]      |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG | md0/E[0]      |                  |                1 |              4 |         4.00 |
+|  cd0/CLK       | md0/nReset0   |                  |                2 |             10 |         5.00 |
 |  clk_IBUF_BUFG |               | btn_IBUF[0]      |               14 |             33 |         2.36 |
 +----------------+---------------+------------------+------------------+----------------+--------------+
 

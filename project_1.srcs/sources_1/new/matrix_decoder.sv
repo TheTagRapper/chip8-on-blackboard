@@ -38,23 +38,31 @@ module matrix_decoder(
     
     logic [1:0] row_no;
     logic [1:0] col_no;
-        
     
+    logic [3:0] calc_number; // Calculate we need to save before writing to catch exceptions
+    
+    // This is to fix bug when switching rows
+        
+        
+     logic col_on;
+
     always_ff @(posedge clk or negedge nReset) begin
       
         // Handling reset
         if (!nReset) begin  
           row_no <= 2'b00;
-          col_no <= 2'b00;
-        end // Handling iteration
+          col_no <= 2'b00;          
+        end // Handling iteration    
         else begin
+          sel_number <= calc_number;
+          ignore_input <= ~col_on; // Needs to be paired with sel_
           if (col_no == 2'b11) row_no <= row_no + 1;
           col_no <= col_no + 1;
+        end
     end
           
           
-       
-    end
+
     
     // Setting which row to write
     always_comb begin
@@ -68,7 +76,6 @@ module matrix_decoder(
      
   	// Setting from which column to read
   	
-  	logic col_on;
   
   	always_comb begin
       case (col_no)
@@ -83,15 +90,12 @@ module matrix_decoder(
   // Parsing out to sel_number (TO CHANGE SO IT DEPENDS FROM COLUMN INPUT)]
   always_comb begin
   
-    if ((col_no != 2'b11) & (row_no != 2'b11)) sel_number = ({2'b00, row_no} << 1) + (row_no + 1 + col_no); // Digits 
-    else if (col_no == 2'b11) sel_number = {2'b00, row_no} + 4'hC; // Last Column Hex Digits
-    else if (col_no[0] == 1'b0) sel_number = ({2'b00 , col_no} >> 1) + 4'hA; // A and B
-    else sel_number = 4'b0000; // 0
+    if ((col_no != 2'b11) & (row_no != 2'b11)) calc_number = ({2'b00, row_no} << 1) + (row_no + 1 + col_no); // Digits 
+    else if (col_no == 2'b11) calc_number = {2'b00, row_no} + 4'hC; // Last Column Hex Digits
+    else if (col_no[0] == 1'b0) calc_number = ({2'b00 , col_no} >> 1) + 4'hA; // A and B
+    else calc_number = 4'b0000; // 0
     
   end
      
-     
-  // Tells when you to ignore the input   
-  assign ignore_input = ~col_on;      
      
 endmodule
