@@ -38,9 +38,9 @@ module matrix_decoder(
     
     logic [1:0] row_no;
     logic [1:0] col_no;
+        
     
     always_ff @(posedge clk or negedge nReset) begin
-   
       
         // Handling reset
         if (!nReset) begin  
@@ -83,10 +83,10 @@ module matrix_decoder(
   // Parsing out to sel_number (TO CHANGE SO IT DEPENDS FROM COLUMN INPUT)]
   always_comb begin
   
-    if ((col_no != 2'b11) & (row_no != 2'b11)) sel_number <= ({2'b00, row_no} << 1) + (row_no + 1 + col_no); // Digits 
-    else if (col_no == 2'b11) sel_number <= {2'b00, row_no} + 4'hC; // Last Column Hex Digits
-    else if (col_no[0] == 1'b0) sel_number <= ({2'b00 , col_no} >> 1) + 4'hA; // A and B
-    else sel_number <= 4'b0000; // 0
+    if ((col_no != 2'b11) & (row_no != 2'b11)) sel_number = ({2'b00, row_no} << 1) + (row_no + 1 + col_no); // Digits 
+    else if (col_no == 2'b11) sel_number = {2'b00, row_no} + 4'hC; // Last Column Hex Digits
+    else if (col_no[0] == 1'b0) sel_number = ({2'b00 , col_no} >> 1) + 4'hA; // A and B
+    else sel_number = 4'b0000; // 0
     
   end
      

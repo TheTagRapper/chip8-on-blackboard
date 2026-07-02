@@ -28,7 +28,7 @@ eval( EAInclude(ISEJScriptLib) );
 
 
 // pre-commands:
-ISETouchFile( "write_bitstream", "begin" );
+ISETouchFile( "init_design", "begin" );
 ISEStep( "vivado",
          "-log matrix_to_sevenseg.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source matrix_to_sevenseg.tcl -notrace" );
 
