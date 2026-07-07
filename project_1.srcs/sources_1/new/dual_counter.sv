@@ -22,7 +22,7 @@
 
 module dual_counter(
         input logic nReset, clk,
-        input [9:0] a_val, b_val,
+        output [9:0] a_val, b_val,
         input en,
         output A, B
     );
@@ -38,7 +38,7 @@ module dual_counter(
     counter_A(
         .nReset(nReset),
         .clk(clk),
-        .cen(a_en),
+        .c_en(a_en),
         .val(a_val)
     );
     
@@ -50,7 +50,7 @@ module dual_counter(
     counter_B( 
             .nReset(nReset),
             .clk(clk),
-            .cen(b_en),
+            .c_en(b_en),
             .val(b_val)
     );
     
