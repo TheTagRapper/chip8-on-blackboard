@@ -30,6 +30,11 @@ module dual_counter(
     logic clk_b;
     logic a_en, b_en;
     
+    logic clk_div;
+    
+    clk_wiz_0 cw0 (.clk_in1(clk) , .clk_out1(clk_div));
+    
+    
     // Up to 823 (I assume this is for HSync?)
     bin_counter #(
         .MAX_COUNT(823), 
@@ -37,7 +42,7 @@ module dual_counter(
     )
     counter_A(
         .nReset(nReset),
-        .clk(clk),
+        .clk(clk_div),
         .c_en(a_en),
         .val(a_val)
     );
@@ -49,7 +54,7 @@ module dual_counter(
     ) 
     counter_B( 
             .nReset(nReset),
-            .clk(clk),
+            .clk(clk_div),
             .c_en(b_en),
             .val(b_val)
     );

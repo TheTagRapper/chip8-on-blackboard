@@ -30,15 +30,15 @@ logic A, B;
 
 dual_counter dc0 (.*);
 
-always #1ps clk <= ~clk;
+always #5ns clk <= ~clk;
 
 initial begin
     en = 1;
     clk = 0;
     nReset = 1;
     
-    #2ps nReset = 0;
-    #2ps nReset = 1;
+    #5ns nReset = 0;
+    #5ns nReset = 1;
 end
 
     

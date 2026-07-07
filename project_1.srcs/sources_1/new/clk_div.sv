@@ -1,6 +1,6 @@
 
 
-module clk_div (
+module clk_div #(con = 1000)(
     input clk,
     input nReset,
     output reg clk_div
