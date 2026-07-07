@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module bin_count #(parameter MAX_COUNT = 255, WIDTH = 8)
+module bin_counter #(parameter MAX_COUNT = 255, WIDTH = 8)
 (
 	input logic nReset, clk, c_en,
 	output logic [WIDTH-1:0] val
@@ -30,7 +30,7 @@ module bin_count #(parameter MAX_COUNT = 255, WIDTH = 8)
     always_ff @(posedge clk or negedge nReset)
     begin
         
-        if (!nReset) val <= 0;
+        if (!nReset || val == MAX_COUNT) val <= 0;
         else if (c_en) val <= val + 1;
     end
 
