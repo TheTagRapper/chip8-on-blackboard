@@ -1,7 +1,0 @@
-Running: xsim.dir/matrix_decoder_tb_behav/xsimk -simmode gui -wdb matrix_decoder_tb_behav.wdb -simrunnum 0 -socket 49311
-Design successfully loaded
-Design Loading Memory Usage: 199148 KB (Peak: 199204 KB)
-Design Loading CPU Usage: 840 ms
-Simulation completed
-Simulation Memory Usage: 289336 KB (Peak: 346608 KB)
-Simulation CPU Usage: 860 ms
