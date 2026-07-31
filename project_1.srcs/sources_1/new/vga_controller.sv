@@ -1,0 +1,42 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 07/31/2026 02:06:20 PM
+// Design Name: 
+// Module Name: vga_controller
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module vga_controller(
+        input logic clk, nReset,
+        output logic hsync, vsync, video_active
+    );
+    
+    logic [9:0] a_val, b_val;
+    logic en;
+    
+    assign en = 1'b1;
+    
+    logic A, B;
+    
+    dual_counter dc0 (.nReset(nReset) , .clk(clk) , .a_val(a_val), .b_val(b_val), .en(en), .A(hsync), .B(vsync));
+    
+    assign hsync = A;
+    assign vsync = B;
+    assign video_active = A & B;
+    
+    
+endmodule

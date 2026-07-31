@@ -1,7 +1,6 @@
-
-// file: clk_wiz_0.v
-// (c) Copyright 2017-2018, 2023 Advanced Micro Devices, Inc. All rights reserved.
-//
+// Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+// Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+// -------------------------------------------------------------------------------
 // This file contains confidential and proprietary information
 // of AMD and is protected under U.S. and international copyright
 // and other intellectual property laws.
@@ -44,49 +43,73 @@
 //
 // THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 // PART OF THIS FILE AT ALL TIMES.
-//----------------------------------------------------------------------------
-// User entered comments
-//----------------------------------------------------------------------------
-// None
 //
-//----------------------------------------------------------------------------
-//  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
-//   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
-//----------------------------------------------------------------------------
-// clk_out1__20.00000______0.000______50.0______183.243_____98.575
-// clk_out2__100.00000______0.000______50.0______130.958_____98.575
-//
-//----------------------------------------------------------------------------
-// Input Clock   Freq (MHz)    Input Jitter (UI)
-//----------------------------------------------------------------------------
-// __primary_________100.000____________0.010
+// DO NOT MODIFY THIS FILE.
 
-`timescale 1ps/1ps
+// MODULE VLNV: realdigital.org:realdigital:hdmi_tx:1.0
 
-(* CORE_GENERATION_INFO = "clk_wiz_0,clk_wiz_v6_0_17_0_0,{component_name=clk_wiz_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=2,clkin1_period=10.000,clkin2_period=10.000,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *)
+`timescale 1ps / 1ps
 
-module clk_wiz_0 
- (
-  // Clock out ports
-  output        clk_out1,
-  output        clk_out2,
-  // Status and control signals
-  input         reset,
-  output        locked,
- // Clock in ports
-  input         clk_in1
- );
+`include "vivado_interfaces.svh"
 
-  clk_wiz_0_clk_wiz inst
-  (
-  // Clock out ports  
-  .clk_out1(clk_out1),
-  .clk_out2(clk_out2),
-  // Status and control signals               
-  .reset(reset), 
-  .locked(locked),
- // Clock in ports
-  .clk_in1(clk_in1)
+module hdmi_tx_0_sv (
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire pix_clk,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire pix_clkx5,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire pix_clk_locked,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire rst,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [7:0] red,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [7:0] green,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [7:0] blue,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire hsync,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire vsync,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire vde,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [3:0] aux0_din,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [3:0] aux1_din,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [3:0] aux2_din,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire ade,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire TMDS_CLK_P,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire TMDS_CLK_N,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [2:0] TMDS_DATA_P,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [2:0] TMDS_DATA_N
+);
+
+  hdmi_tx_0 inst (
+    .pix_clk(pix_clk),
+    .pix_clkx5(pix_clkx5),
+    .pix_clk_locked(pix_clk_locked),
+    .rst(rst),
+    .red(red),
+    .green(green),
+    .blue(blue),
+    .hsync(hsync),
+    .vsync(vsync),
+    .vde(vde),
+    .aux0_din(aux0_din),
+    .aux1_din(aux1_din),
+    .aux2_din(aux2_din),
+    .ade(ade),
+    .TMDS_CLK_P(TMDS_CLK_P),
+    .TMDS_CLK_N(TMDS_CLK_N),
+    .TMDS_DATA_P(TMDS_DATA_P),
+    .TMDS_DATA_N(TMDS_DATA_N)
   );
 
 endmodule

@@ -21,12 +21,12 @@
 
 
 module dual_counter(
-        input logic [3:0] btn, 
+        input logic nReset, 
         input logic clk,
-//        output [9:0] a_val, b_val,
-//        input en,
+        output [9:0] a_val, b_val,
+        input en,
         (* mark_debug = "true", keep = "true" *)
-        output [9:0] led
+        output logic A, B
     );
     
     logic clk_b;
@@ -36,17 +36,13 @@ module dual_counter(
     
     logic clk_div;
     
-    logic nReset;
-    
-    assign nReset = ~btn[0] ;
     
     clk_wiz_0 cw0 (.clk_in1(clk) , .clk_out1(clk_div));
     
-    assign led[9:2] = 8'h00;
     
     // Up to 823 (I assume this is for HSync?)
     bin_counter #(
-        .MAX_COUNT(823), 
+        .MAX_COUNT(800), 
         .WIDTH(10)
     )
     counter_A(
@@ -58,7 +54,7 @@ module dual_counter(
     
     // Up to 600 (I assume for VSync)
     bin_counter #(
-            .MAX_COUNT(600),
+            .MAX_COUNT(525),
             .WIDTH(10)
     ) 
     counter_B( 
@@ -68,13 +64,13 @@ module dual_counter(
             .val(b_val)
     );
     
-    assign a_en = 1'b1;
+    assign a_en = en;
     
-    assign b_en = (a_val==823); // Triggers on A limit reach
+    assign b_en = (a_val==800); // Triggers on A limit reach
     
     
     // Turns off at half value (is this linked to the front porch and back porch concepts?)
-    assign led[0] = (a_val<=412);
-    assign led[1] = (b_val<=300);
+    assign A = (a_val <= 656 || a_val >= 16);
+    assign B = (b_val <= 490 || b_val >= 10);
     
 endmodule
