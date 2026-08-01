@@ -113,14 +113,19 @@ module display_controller(
     
     always_ff @(posedge clk_25MHZ or negedge nReset)
     begin
-        if (~nReset) {box_px, box_py, frame_divider} <= 0;
-        else if (frame_divider == 2500000) begin
-                box_px <= box_px + 1;
-                box_py <= box_py + 1;
-                frame_divider <= 0;
-                
-                if (box_px >= 640 || box_py >= 480) {box_px, box_py} = 0;
-         end
-       else frame_divider <= frame_divider + 1;
+        if (~nReset) {box_px, box_py, frame_divider} <= 1;
+       
+        else if (box_px >= 608 || box_py >= 448) {box_px, box_py} = 1;
+    
+        else if ((frame_divider == 250000)) begin
+            box_px <= box_px + 1;
+            box_py <= box_py + 1;
+            frame_divider <= 0;    
+            end 
+     
+        else frame_divider <= frame_divider + 1;
+
+
+
     end
 endmodule
