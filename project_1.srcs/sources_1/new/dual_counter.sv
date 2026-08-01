@@ -65,6 +65,8 @@ module dual_counter(
     assign b_en = (a_val==800); // Triggers on A limit reach
     
     
+    // Front Porch | Video | SYNC | Back Porch
+    
     // HSYNC 
     assign A = ~((a_val >= 656) && (a_val < 752));
     

@@ -22,7 +22,8 @@
 
 module vga_controller(
         input logic clk, nReset,
-        output logic hsync, vsync, video_active
+        output logic hsync, vsync, video_active,
+        output logic [9:0] px, py
     );
     
     logic [9:0] a_val, b_val;
@@ -33,6 +34,12 @@ module vga_controller(
     
     dual_counter dc0 (.nReset(nReset) , .clk(clk) , .a_val(a_val), .b_val(b_val), .en(en), .A(hsync), .B(vsync));
 
-    assign video_active = (a_val < 640) && (b_val < 480);    
+    assign video_active = (a_val > 15) && (a_val < 656) && (b_val > 9) && (b_val < 490);    
+    
+    always_ff @(posedge clk)
+    begin
+        if ((a_val > 15) && (a_val < 656)) px <= a_val - 15;
+        if ((b_val > 9) && (b_val < 490)) py <= b_val - 9;
+    end
     
 endmodule
