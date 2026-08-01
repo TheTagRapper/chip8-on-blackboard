@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 07/07/2026 03:10:01 PM
+// Create Date: 07/31/2026 05:07:42 PM
 // Design Name: 
-// Module Name: dual_counter_tb
+// Module Name: display_controller_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,31 +20,31 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module dual_counter_tb;
+module display_controller_tb;
 
-logic nReset, clk;
-logic [9:0] a_val, b_val;
-logic en;
-logic A, B;
+logic clk;
+logic [3:0] btn;
 
+logic hdmi_clk_n, hdmi_clk_p;
+logic [2:0] hdmi_tx_n;
+logic [2:0] hdmi_tx_p;
 logic hdmi_out_en;
 logic hdmi_hpd;
+logic [9:0] led;
 
-
-dual_counter dc0 (.*);
+display_controller dc0 (.*);
 
 always #5ns clk <= ~clk;
 
 initial begin
-    en = 1;
     clk = 0;
-    nReset = 1;
+    btn[0] = 0;
     hdmi_hpd = 1;
     
+    #5ns btn[0] = 1;
+    #5ns btn[0] = 0;
     
-    #5ns nReset = 0;
-    #5ns nReset = 1;
+    #2000ns btn[0] = 1;
+    #5ns btn[0] = 0;
 end
-
-    
 endmodule

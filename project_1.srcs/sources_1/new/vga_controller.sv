@@ -30,13 +30,9 @@ module vga_controller(
     
     assign en = 1'b1;
     
-    logic A, B;
     
     dual_counter dc0 (.nReset(nReset) , .clk(clk) , .a_val(a_val), .b_val(b_val), .en(en), .A(hsync), .B(vsync));
-    
-    assign hsync = A;
-    assign vsync = B;
-    assign video_active = A & B;
-    
+
+    assign video_active = (a_val < 640) && (b_val < 480);    
     
 endmodule

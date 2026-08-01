@@ -32,6 +32,7 @@ vlog -work xil_defaultlib -64 -incr -mfcu  -sv "+incdir+../../../../../../../../
 "../../../project_1.srcs/sources_1/new/sevenseg_decoder.sv" \
 "../../../project_1.srcs/sources_1/new/testingPMODC.sv" \
 "../../../project_1.srcs/sources_1/new/vga_controller.sv" \
+"../../../project_1.srcs/sources_1/new/display_controller.sv" \
 "../../../project_1.srcs/sim_1/new/matrix_decoder_tb.sv" \
 "../../../project_1.srcs/sim_1/new/matrix_to_sevenseg_tb.sv" \
 "../../../project_1.srcs/sim_1/new/bin_counter_tb.sv" \

@@ -21,6 +21,66 @@
 
 
 module display_controller(
-
+        input logic clk,
+        input logic [3:0] btn,
+        
+        output logic hdmi_clk_n, hdmi_clk_p, 
+        output logic [2:0] hdmi_tx_n,
+        output logic [2:0] hdmi_tx_p,
+        
+//        (* mark_debug = "true" , keep = "true" *)
+//        output logic hdmi_out_en,
+        
+//        (* mark_debug = "true" , keep = "true" *)
+//        input logic hdmi_hpd, // Detects when monitor is plugged in
+        
+        output logic [9:0] led
+    );
+    
+    
+    
+//    assign hdmi_out_en = 1'b1;
+    
+    logic nReset;
+    
+    assign nReset = ~btn[0];
+    
+    logic clk_25MHZ;
+    logic clk_125MHZ;
+    
+    logic locked;
+    logic hsync, vsync, video_active;
+    
+    clk_wiz_0 cw0 (.clk_in1(clk) , .clk_out1(clk_25MHZ), .locked(locked),
+                   .clk_out2(clk_125MHZ), .reset(~nReset));
+    
+    
+    vga_controller vga_c (.clk(clk_25MHZ), .nReset(nReset), .hsync(hsync), .vsync(vsync), .video_active(video_active));
+    
+    
+    assign led[9:0] = {locked, hsync, vsync, video_active, 1'b0,  3'b0, 1'b0, 1'b0};
+    
+    hdmi_tx_0 hdmi_to_vga (
+        .pix_clk(clk_25MHZ),
+        .pix_clkx5(clk_125MHZ),
+        .pix_clk_locked(locked),
+        .rst(~nReset),
+        .red(8'hEF),
+        .green(8'h3A),
+        .blue(8'h2B),
+        .hsync(hsync),
+        .vsync(vsync),
+        .vde(video_active),
+        
+        .aux0_din(4'b0),              
+      .aux1_din(4'b0),              
+      .aux2_din(4'b0),              
+      .ade(1'b0),
+      
+      // Differential outputs
+      .TMDS_CLK_P(hdmi_clk_p),          
+      .TMDS_CLK_N(hdmi_clk_n),          
+      .TMDS_DATA_P(hdmi_tx_p),         
+      .TMDS_DATA_N(hdmi_tx_n)
     );
 endmodule

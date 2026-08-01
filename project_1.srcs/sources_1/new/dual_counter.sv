@@ -25,7 +25,7 @@ module dual_counter(
         input logic clk,
         output [9:0] a_val, b_val,
         input en,
-        (* mark_debug = "true", keep = "true" *)
+        //(* mark_debug = "true", keep = "true" *)
         output logic A, B
     );
     
@@ -34,11 +34,7 @@ module dual_counter(
     
     logic [9:0] a_val, b_val;
     
-    logic clk_div;
-    
-    
-    clk_wiz_0 cw0 (.clk_in1(clk) , .clk_out1(clk_div));
-    
+        
     
     // Up to 823 (I assume this is for HSync?)
     bin_counter #(
@@ -47,7 +43,7 @@ module dual_counter(
     )
     counter_A(
         .nReset(nReset),
-        .clk(clk_div),
+        .clk(clk),
         .c_en(a_en),
         .val(a_val)
     );
@@ -59,7 +55,7 @@ module dual_counter(
     ) 
     counter_B( 
             .nReset(nReset),
-            .clk(clk_div),
+            .clk(clk),
             .c_en(b_en),
             .val(b_val)
     );
@@ -69,8 +65,9 @@ module dual_counter(
     assign b_en = (a_val==800); // Triggers on A limit reach
     
     
-    // Turns off at half value (is this linked to the front porch and back porch concepts?)
-    assign A = (a_val <= 656 || a_val >= 16);
-    assign B = (b_val <= 490 || b_val >= 10);
+    // HSYNC 
+    assign A = ~((a_val >= 656) && (a_val < 752));
     
+    // VSYNC
+    assign B = ~((b_val >= 490) && (b_val < 492));    
 endmodule

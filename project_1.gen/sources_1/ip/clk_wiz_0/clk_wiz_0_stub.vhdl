@@ -2,7 +2,7 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
--- Date        : Fri Jul 31 14:53:50 2026
+-- Date        : Fri Jul 31 15:05:31 2026
 -- Host        : pyra-pargat-linuxmint running 64-bit Linux Mint 22.3
 -- Command     : write_vhdl -force -mode synth_stub {/home/pyra/Documents/Personal
 --               Projects/CHIP8-on-Blackboard/project_1.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_stub.vhdl}
