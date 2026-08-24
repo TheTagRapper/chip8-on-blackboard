@@ -41,7 +41,7 @@ module program_counter(
       
       logic [15:0] address;
       
-      assign increment_signal = (enable_increment ? ( (increment_source) ? ALU_Increment : KPU_Increment ) : 0);
+      assign increment_signal = (enable_increment ? ( (increment_source) ?  KPU_Increment : ALU_Increment ) : 0);
       
       
       
